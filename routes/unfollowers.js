@@ -22,7 +22,7 @@ exports.findByScreenName = function(req, res) {
 	var screen_name = req.params.screen_name;
 	console.log('Retrieving followers of: ' + screen_name);
     db.collection('followers', function(err, collection) {
-        collection.find({"user_name" : screen_name , "isDeleted" : false}).toArray(function(err, items) {
+        collection.find({"user_name" : screen_name , "isDeleted" : true}).toArray(function(err, items) {
             res.send(items);
         });
     });
@@ -30,7 +30,7 @@ exports.findByScreenName = function(req, res) {
 
 exports.findAll = function(req, res) {
     db.collection('followers', function(err, collection) {
-        collection.find({"isDeleted" : false}).toArray(function(err, items) {
+        collection.find({"isDeleted" : true}).toArray(function(err, items) {
             res.send(items);
         });
     });
